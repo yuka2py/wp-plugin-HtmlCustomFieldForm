@@ -1,0 +1,51 @@
+<div class="wrap">
+	<?php screen_icon('edit'); ?>
+	<h2>Html Custome Field Form</h2>
+	<p>カスタムフィールドのテンプレート作成を、見慣れた html の基本で実現します。html や css を記述できる方であれば、レイアウトを自由に記述しつつ、またそれを最小限の学習コストでカスタムフィールドを扱うことが出来ます。</p>
+	<form action="" method="post">
+		<table class="form-table">
+			<tr>
+				<th><label for="hcff[title]">テンプレート名</label></th>
+				<td><input type="text" style="width:100%;"
+					name="hcff[title]" 
+					value="<?php echo esc_attr(isset($hcff['title']) ? $hcff['title'] : '') ?>" /></td>
+			</tr>
+			<tr>
+				<th><label for="hcff[slag]">テンプレートスラッグ</label></th>
+				<td><input type="text" style="width:100%;"
+					name="hcff[slag]" 
+					value="<?php echo esc_attr(isset($hcff['slag']) ? $hcff['slag'] : '') ?>" /></td>
+			</tr>
+			<tr>
+				<th><label for="hcff[template]">テンプレートXHTML</label></th>
+				<td><textarea id="hcff[template]"
+							name="hcff[template]"
+							rows="20"
+							style="width:100%;"
+						><?php echo esc_html(isset($hcff['template']) ? $hcff['template'] : '') ?></textarea>
+					<p>[バインド変数名] <strong><?php echo esc_html(implode(' / ', $hcfform->getFieldNames())) ?></strong></p>
+					<p><input type="submit" class="button-primary" value="変更を保存" /></p>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="hcff[template]">プレビュー</label></th>
+				<td class="metabox-holder">
+					<div class="postbox">
+						<h3><?php echo esc_attr(isset($hcff['title']) ? $hcff['title'] : '') ?></h3>
+						<div class="inside"><?php echo $hcfform->saveHTML() ?></div>
+					</div>
+			</tr>
+			<tr>
+				<th><label>コンパイル済みXHTML</label></th>
+				<td><textarea
+							rows="20"
+							style="width:100%;"
+							readonly="readonly"
+							editable="false"
+						><?php echo esc_html($hcfform->saveHTML()) ?></textarea>
+					</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
